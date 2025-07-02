@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{d7a62597-f512-49cd-86df-216d267fcf64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="src\SystemSingleton">
+      <UniqueIdentifier>{00169ddc-3c61-489b-89ce-389122c2348d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Header">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="src\Message">
+      <UniqueIdentifier>{d3ebd802-95f7-492f-8e51-6194fd85dc92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Socket">
+      <UniqueIdentifier>{23d12946-bbf0-4d82-803d-f9c3c32a4649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\StringMessage">
+      <UniqueIdentifier>{61c83a3a-e184-47a7-8c41-4d96d12aaf59}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>src\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>src\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>src\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="TP2_SDA.h">
+      <Filter>src\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="StringMessage.h">
+      <Filter>src\StringMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketServer.h">
+      <Filter>src\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="RDPMessage.h">
+      <Filter>src\StringMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="DPMessage.h">
+      <Filter>src\StringMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="CRMessage_ACK.h">
+      <Filter>src\StringMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="CMessage_ACK.h">
+      <Filter>src\StringMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="EDMessage.h">
+      <Filter>src\StringMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="Message.h">
+      <Filter>src\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="SocketMessage.h">
+      <Filter>src\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageStack.h">
+      <Filter>src\SystemSingleton</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageSocketServer.h">
+      <Filter>src\Socket</Filter>
+    </ClInclude>
+    <ClInclude Include="CentralController.h">
+      <Filter>src\SystemSingleton</Filter>
+    </ClInclude>
+    <ClInclude Include="LogBuffer.h">
+      <Filter>src\SystemSingleton</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TP2_SDA.cpp">
+      <Filter>src\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketServer.cpp">
+      <Filter>src\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="StringMessage.cpp">
+      <Filter>src\StringMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="RDPMessage.cpp">
+      <Filter>src\StringMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="DPMessage.cpp">
+      <Filter>src\StringMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="CRMessage_ACK.cpp">
+      <Filter>src\StringMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="CMessage_ACK.cpp">
+      <Filter>src\StringMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="EDMessage.cpp">
+      <Filter>src\StringMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="Message.cpp">
+      <Filter>src\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="SocketMessage.cpp">
+      <Filter>src\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageStack.cpp">
+      <Filter>src\SystemSingleton</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageSocketServer.cpp">
+      <Filter>src\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="CentralController.cpp">
+      <Filter>src\SystemSingleton</Filter>
+    </ClCompile>
+    <ClCompile Include="LogBuffer.cpp">
+      <Filter>src\SystemSingleton</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TP2_SDA.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="TP2_SDA.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
