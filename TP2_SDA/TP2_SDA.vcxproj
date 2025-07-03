@@ -143,12 +143,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\opcda.h" />
-    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\opcerror.h" />
-    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\SimpleOPCClient_v3.h" />
-    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\SOCAdviseSink.h" />
-    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\SOCDataCallback.h" />
-    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\SOCWrapperFunctions.h" />
     <ClInclude Include="CentralController.h" />
     <ClInclude Include="CMessage_ACK.h" />
     <ClInclude Include="CRMessage_ACK.h" />
@@ -163,10 +157,16 @@
     <ClInclude Include="OpcGroup.h" />
     <ClInclude Include="OpcItem.h" />
     <ClInclude Include="OpcOperator.h" />
+    <ClInclude Include="OpcQuery.h" />
     <ClInclude Include="OpcServer.h" />
-    <ClInclude Include="OpcServerFactory.h" />
     <ClInclude Include="RDPMessage.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SimpleOPCClient_V3\opcda.h" />
+    <ClInclude Include="SimpleOPCClient_V3\opcerror.h" />
+    <ClInclude Include="SimpleOPCClient_V3\SimpleOPCClient_v3.h" />
+    <ClInclude Include="SimpleOPCClient_V3\SOCAdviseSink.h" />
+    <ClInclude Include="SimpleOPCClient_V3\SOCDataCallback.h" />
+    <ClInclude Include="SimpleOPCClient_V3\SOCWrapperFunctions.h" />
     <ClInclude Include="SocketMessage.h" />
     <ClInclude Include="SocketServer.h" />
     <ClInclude Include="StringMessage.h" />
@@ -175,11 +175,6 @@
     <ClInclude Include="Update.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\opcda_i.c" />
-    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\SimpleOPCClient_v3.cpp" />
-    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\SOCAdviseSink.cpp" />
-    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\SOCDataCallback.cpp" />
-    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\SOCWrapperlFunctions.cpp" />
     <ClCompile Include="CentralController.cpp" />
     <ClCompile Include="CMessage_ACK.cpp" />
     <ClCompile Include="CRMessage_ACK.cpp" />
@@ -193,9 +188,14 @@
     <ClCompile Include="OpcGroup.cpp" />
     <ClCompile Include="OpcItem.cpp" />
     <ClCompile Include="OpcOperator.cpp" />
+    <ClCompile Include="OpcQuery.cpp" />
     <ClCompile Include="OpcServer.cpp" />
-    <ClCompile Include="OpcServerFactory.cpp" />
     <ClCompile Include="RDPMessage.cpp" />
+    <ClCompile Include="SimpleOPCClient_V3\opcda_i.c" />
+    <ClCompile Include="SimpleOPCClient_V3\SimpleOPCClient_v3.cpp" />
+    <ClCompile Include="SimpleOPCClient_V3\SOCAdviseSink.cpp" />
+    <ClCompile Include="SimpleOPCClient_V3\SOCDataCallback.cpp" />
+    <ClCompile Include="SimpleOPCClient_V3\SOCWrapperlFunctions.cpp" />
     <ClCompile Include="SocketMessage.cpp" />
     <ClCompile Include="SocketServer.cpp" />
     <ClCompile Include="StringMessage.cpp" />
