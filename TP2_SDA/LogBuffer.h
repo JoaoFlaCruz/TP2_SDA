@@ -4,6 +4,11 @@
 #include <sstream>
 #include <iostream>
 #include <mutex>
+#include <chrono>
+#include <ctime>
+#include <iomanip>
+
+#include "Update.h"
 
 class LogBuffer {
 private:

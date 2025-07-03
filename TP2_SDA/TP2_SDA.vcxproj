@@ -143,6 +143,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\opcda.h" />
+    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\opcerror.h" />
+    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\SimpleOPCClient_v3.h" />
+    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\SOCAdviseSink.h" />
+    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\SOCDataCallback.h" />
+    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\SOCWrapperFunctions.h" />
     <ClInclude Include="CentralController.h" />
     <ClInclude Include="CMessage_ACK.h" />
     <ClInclude Include="CRMessage_ACK.h" />
@@ -153,6 +159,12 @@
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageSocketServer.h" />
     <ClInclude Include="MessageStack.h" />
+    <ClInclude Include="OpcDataRequest.h" />
+    <ClInclude Include="OpcGroup.h" />
+    <ClInclude Include="OpcItem.h" />
+    <ClInclude Include="OpcOperator.h" />
+    <ClInclude Include="OpcServer.h" />
+    <ClInclude Include="OpcServerFactory.h" />
     <ClInclude Include="RDPMessage.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SocketMessage.h" />
@@ -160,8 +172,14 @@
     <ClInclude Include="StringMessage.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TP2_SDA.h" />
+    <ClInclude Include="Update.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\opcda_i.c" />
+    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\SimpleOPCClient_v3.cpp" />
+    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\SOCAdviseSink.cpp" />
+    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\SOCDataCallback.cpp" />
+    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\SOCWrapperlFunctions.cpp" />
     <ClCompile Include="CentralController.cpp" />
     <ClCompile Include="CMessage_ACK.cpp" />
     <ClCompile Include="CRMessage_ACK.cpp" />
@@ -171,11 +189,18 @@
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="MessageSocketServer.cpp" />
     <ClCompile Include="MessageStack.cpp" />
+    <ClCompile Include="OpcDataRequest.cpp" />
+    <ClCompile Include="OpcGroup.cpp" />
+    <ClCompile Include="OpcItem.cpp" />
+    <ClCompile Include="OpcOperator.cpp" />
+    <ClCompile Include="OpcServer.cpp" />
+    <ClCompile Include="OpcServerFactory.cpp" />
     <ClCompile Include="RDPMessage.cpp" />
     <ClCompile Include="SocketMessage.cpp" />
     <ClCompile Include="SocketServer.cpp" />
     <ClCompile Include="StringMessage.cpp" />
     <ClCompile Include="TP2_SDA.cpp" />
+    <ClCompile Include="Update.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="TP2_SDA.rc" />

@@ -28,6 +28,12 @@
     <Filter Include="src\StringMessage">
       <UniqueIdentifier>{61c83a3a-e184-47a7-8c41-4d96d12aaf59}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Opc">
+      <UniqueIdentifier>{462bb093-52fe-4cc5-8c6c-88b4c4b42304}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\SimpleOPCClient_V3">
+      <UniqueIdentifier>{f90eec1f-2481-44eb-aa9e-77a58aabb532}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -81,6 +87,45 @@
     <ClInclude Include="LogBuffer.h">
       <Filter>src\SystemSingleton</Filter>
     </ClInclude>
+    <ClInclude Include="OpcOperator.h">
+      <Filter>src\SystemSingleton</Filter>
+    </ClInclude>
+    <ClInclude Include="OpcItem.h">
+      <Filter>src\Opc</Filter>
+    </ClInclude>
+    <ClInclude Include="OpcGroup.h">
+      <Filter>src\Opc</Filter>
+    </ClInclude>
+    <ClInclude Include="OpcServer.h">
+      <Filter>src\Opc</Filter>
+    </ClInclude>
+    <ClInclude Include="OpcServerFactory.h">
+      <Filter>src\Opc</Filter>
+    </ClInclude>
+    <ClInclude Include="OpcDataRequest.h">
+      <Filter>src\Opc</Filter>
+    </ClInclude>
+    <ClInclude Include="Update.h">
+      <Filter>src\SystemSingleton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\opcda.h">
+      <Filter>src\SimpleOPCClient_V3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\opcerror.h">
+      <Filter>src\SimpleOPCClient_V3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\SimpleOPCClient_v3.h">
+      <Filter>src\SimpleOPCClient_V3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\SOCAdviseSink.h">
+      <Filter>src\SimpleOPCClient_V3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\SOCDataCallback.h">
+      <Filter>src\SimpleOPCClient_V3</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\SimpleOPCClient_VS_Community\SOCWrapperFunctions.h">
+      <Filter>src\SimpleOPCClient_V3</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TP2_SDA.cpp">
@@ -124,6 +169,42 @@
     </ClCompile>
     <ClCompile Include="LogBuffer.cpp">
       <Filter>src\SystemSingleton</Filter>
+    </ClCompile>
+    <ClCompile Include="OpcOperator.cpp">
+      <Filter>src\SystemSingleton</Filter>
+    </ClCompile>
+    <ClCompile Include="OpcItem.cpp">
+      <Filter>src\Opc</Filter>
+    </ClCompile>
+    <ClCompile Include="OpcGroup.cpp">
+      <Filter>src\Opc</Filter>
+    </ClCompile>
+    <ClCompile Include="OpcServer.cpp">
+      <Filter>src\Opc</Filter>
+    </ClCompile>
+    <ClCompile Include="OpcServerFactory.cpp">
+      <Filter>src\Opc</Filter>
+    </ClCompile>
+    <ClCompile Include="OpcDataRequest.cpp">
+      <Filter>src\Opc</Filter>
+    </ClCompile>
+    <ClCompile Include="Update.cpp">
+      <Filter>src\SystemSingleton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\opcda_i.c">
+      <Filter>src\SimpleOPCClient_V3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\SimpleOPCClient_v3.cpp">
+      <Filter>src\SimpleOPCClient_V3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\SOCAdviseSink.cpp">
+      <Filter>src\SimpleOPCClient_V3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\SOCDataCallback.cpp">
+      <Filter>src\SimpleOPCClient_V3</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SimpleOPCClient_VS_Community\SOCWrapperlFunctions.cpp">
+      <Filter>src\SimpleOPCClient_V3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

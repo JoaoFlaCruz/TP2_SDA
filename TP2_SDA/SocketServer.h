@@ -8,7 +8,6 @@
 #include <thread>
 #include <string>
 #include <deque>
-#include <mutex>
 
 #include "MessageSocketServer.h"
 #include "LogBuffer.h";

@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <iostream>
 #include <process.h>
+#include <mutex>
 #include "MessageSocketServer.h"
 #include "LogBuffer.h";
 
@@ -20,11 +21,13 @@ class MessageSocketServer
 protected:
     SOCKET a_client_socket;
     MessageStack* a_message_stack;
+    std::mutex a_mutex;
 public:
     MessageSocketServer(SOCKET p_client_socket = INVALID_SOCKET);
     ~MessageSocketServer();
 
     void acceptMessages();
+	void sendMessage(const std::string& p_message);
     void closeSocket();
 };
 

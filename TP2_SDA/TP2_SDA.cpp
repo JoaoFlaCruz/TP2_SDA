@@ -11,6 +11,7 @@
 #pragma comment(lib, "user32.lib")
 
 #define MAX_LOADSTRING 100
+#define WM_UPDATE_TRIGGER_MAIN_WINDOW (WM_APP + 1)
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
@@ -129,6 +130,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
+   Update* update = Update::getInstance();
+   update->setMainWindow(hWnd);
    
    std::thread([]() {
        SocketServer socket = SocketServer();
@@ -137,14 +140,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        socket.listenSocket();
        }).detach();
 
-   CentralController* controller = CentralController::getInstance();
-
    std::thread([]() {
        CentralController* controller = CentralController::getInstance();
        controller->consumeMessages();
        }).detach();
-
-   SetTimer(hWnd, 1, 100, NULL);
 
    return TRUE;
 }
@@ -191,11 +190,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
-    case WM_TIMER:
-        if (wParam == 1) {
-            // Aqui você faz o update que quiser, por exemplo:
-            UpdateTextBox(hWnd);
-        }
+    case WM_UPDATE_TRIGGER_MAIN_WINDOW:
+        // Chamadas de função ativadas pelo Trigger de Update para Main Screen
+        UpdateTextBox(hWnd);
         break;
 
     default:
@@ -224,6 +221,7 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     return (INT_PTR)FALSE;
 }
 
+// Updates ativados pelos triggers em Update.h
 void UpdateTextBox(HWND hWnd) {
     HWND hEdit = GetDlgItem(hWnd, 1001);
     if (!hEdit) return;

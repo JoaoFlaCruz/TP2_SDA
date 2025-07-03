@@ -12,6 +12,4 @@ protected:
 public:
 	SocketMessage(std::string p_message, MessageSocketServer* p_socket_server);
 	~SocketMessage();
-
-	bool send();
 };

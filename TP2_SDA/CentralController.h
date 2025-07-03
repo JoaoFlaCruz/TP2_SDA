@@ -1,8 +1,10 @@
 #pragma once
 
 #include "MessageStack.h"
-#include "LogBuffer.h";
+#include "LogBuffer.h"
 #include <mutex>
+#include <chrono>
+#include <thread>
 
 class CentralController
 {
@@ -11,7 +13,7 @@ protected:
 	static CentralController* instance;
 	std::mutex a_mutex;
 
-	CentralController() = default;
+	CentralController();
 	~CentralController() = default;
 
 public:
