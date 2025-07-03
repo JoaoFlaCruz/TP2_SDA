@@ -25,6 +25,8 @@
 #ifndef SIMPLE_OPC_CLIENT_H
 #define SIMPLE_OPC_CLIENT_H
 
+#include "../OpcConstants.h"
+
 IOPCServer *InstantiateServer(wchar_t ServerName[]);
 void AddTheGroup(IOPCServer* pIOPCServer, IOPCItemMgt* &pIOPCItemMgt, 
 				 OPCHANDLE& hServerGroup);

@@ -7,6 +7,9 @@
 #include "CentralController.h"
 #include "SocketServer.h"
 #include "LogBuffer.h"
+#include "OpcOperator.h"
+
+#include "Config.h"
 
 #pragma comment(lib, "user32.lib")
 
@@ -136,13 +139,18 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    std::thread([]() {
        SocketServer socket = SocketServer();
        socket.initializeSocket();
-       socket.bindSocket(4885);
+       int tcp_port = TCP_PORT;
+       socket.bindSocket(tcp_port);
        socket.listenSocket();
        }).detach();
 
    std::thread([]() {
        CentralController* controller = CentralController::getInstance();
        controller->consumeMessages();
+       }).detach();
+
+   std::thread([]() {
+       OpcOperator* opc_operator = OpcOperator::getInstance();
        }).detach();
 
    return TRUE;

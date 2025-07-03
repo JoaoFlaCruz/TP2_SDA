@@ -45,7 +45,6 @@ using namespace std;
 
 // The OPC DA Spec requires that some constants be registered in order to use
 // them. The one below refers to the OPC DA 1.0 IDataObject interface.
-UINT OPC_DATA_TIME = RegisterClipboardFormat (_T("OPCSTMFORMATDATATIME"));
 
 wchar_t ITEM_ID[]=L"Saw-toothed Waves.Real4";
 

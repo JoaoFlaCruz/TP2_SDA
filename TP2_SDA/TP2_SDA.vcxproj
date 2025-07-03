@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -149,6 +149,9 @@
     <ClInclude Include="DPMessage.h" />
     <ClInclude Include="EDMessage.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="Config.h" />
+    <ClInclude Include="OpcConstants.h" />
     <ClInclude Include="LogBuffer.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageSocketServer.h" />
@@ -198,6 +201,7 @@
     <ClCompile Include="SimpleOPCClient_V3\SOCWrapperlFunctions.cpp" />
     <ClCompile Include="SocketMessage.cpp" />
     <ClCompile Include="SocketServer.cpp" />
+    <ClCompile Include="OpcConstants.cpp" />
     <ClCompile Include="StringMessage.cpp" />
     <ClCompile Include="TP2_SDA.cpp" />
     <ClCompile Include="Update.cpp" />
