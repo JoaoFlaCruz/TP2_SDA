@@ -1,4 +1,5 @@
 #pragma once
+#define WIN32_LEAN_AND_MEAN
 #include <string>
 #include <sstream>
 #include <stdexcept>
@@ -16,6 +17,7 @@ public:
     ~StringMessage();
 
     virtual std::string getMessage() = 0;
+    virtual StringMessage* getResponse() = 0;
     static StringMessage* buildSelf(const std::vector<std::string>& values);
 
     std::string int2string(int p_number, int left_zeros = 3);

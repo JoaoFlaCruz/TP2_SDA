@@ -148,6 +148,7 @@
     <ClInclude Include="CRMessage_ACK.h" />
     <ClInclude Include="DPMessage.h" />
     <ClInclude Include="EDMessage.h" />
+    <ClInclude Include="EndMessage.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Config.h" />
     <ClInclude Include="Config.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="CRMessage_ACK.cpp" />
     <ClCompile Include="DPMessage.cpp" />
     <ClCompile Include="EDMessage.cpp" />
+    <ClCompile Include="EndMessage.cpp" />
     <ClCompile Include="LogBuffer.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="MessageSocketServer.cpp" />

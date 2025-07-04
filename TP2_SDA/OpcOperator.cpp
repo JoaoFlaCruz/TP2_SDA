@@ -35,6 +35,32 @@ OpcOperator* OpcOperator::getInstance() {
 	return &instance;
 }
 
-void OpcOperator::readMessages() {
-	
+void OpcOperator::updateData(int p_op_number, int p_fab_recipe, float p_piece_type, float p_cel_id) {
+	std::lock_guard<std::mutex> lock(a_mutex);
+	OpcGroup* group = a_server->getGroup("GrupoEscritaSincrona");
+	std::string op_number = std::to_string(p_op_number);
+	std::string fab_recipe = std::to_string(p_fab_recipe);
+	std::string piece_type = std::to_string(p_piece_type);
+	std::string cel_id = std::to_string(p_cel_id);
+
+	OpcItem* item = group->getItem("Bucket Brigade.Int2");
+	item->writeValue(op_number);
+	item = group->getItem("Bucket Brigade.Int4");
+	item->writeValue(fab_recipe);
+	item = group->getItem("Bucket Brigade.Real4");
+	item->writeValue(piece_type);
+	item = group->getItem("Bucket Brigade.Real8");
+	item->writeValue(cel_id);
+}
+
+std::vector<std::string> OpcOperator::getData() {
+	std::vector<std::string> data;
+
+	OpcGroup* group = a_server->getGroup("GrupoLeituraAssincrona");
+	data.push_back(group->getItem("Random.Int2")->getValue());
+	data.push_back(group->getItem("Random.Int4")->getValue());
+	data.push_back(group->getItem("Saw-toothed Waves.Real4")->getValue());
+	data.push_back(group->getItem("Triangle Waves.Real4")->getValue());
+
+	return data;
 }

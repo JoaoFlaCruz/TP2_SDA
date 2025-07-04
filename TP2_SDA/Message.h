@@ -22,6 +22,7 @@ public:
 
 	bool send();
 	std::string toString();
-	std::unique_ptr<StringMessage> getStringMessage();
+	StringMessage* getStringMessage();
+	std::vector<std::string> getData();
 };
 

@@ -14,5 +14,12 @@ StringMessage* RDPMessage::buildSelf(const std::vector<std::string>& values) {
 
     int seq = std::stoi(values[0]);
 
-    return new RDPMessage(seq);
+    return (StringMessage*) new RDPMessage(seq);
+}
+
+StringMessage* RDPMessage::getResponse() {
+    OpcOperator* opc_operator = OpcOperator::getInstance();
+    std::vector<std::string> data = opc_operator->getData();
+    data.insert(data.begin(), std::to_string(a_seq_message_number + 1));
+    return (StringMessage*) DPMessage::buildSelf(data);
 }

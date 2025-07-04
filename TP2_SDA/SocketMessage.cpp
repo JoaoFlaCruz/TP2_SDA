@@ -1,4 +1,5 @@
 #include "SocketMessage.h"
+#include "MessageStack.h"
 
 SocketMessage::SocketMessage(std::string p_message, MessageSocketServer* p_socket_server)
     : Message(p_message), a_socket_server(p_socket_server) {
@@ -33,3 +34,14 @@ SocketMessage::SocketMessage(std::string p_message, MessageSocketServer* p_socke
 }
 
 SocketMessage::~SocketMessage() {}
+
+bool SocketMessage::send() {
+    StringMessage* string_message = a_string_message->getResponse();
+    if (string_message != nullptr) {
+        MessageStack* message_stack = MessageStack::getInstance();
+        a_socket_server->sendMessage(string_message->getMessage());
+        message_stack->insertSocketMessage(string_message->getMessage(), a_socket_server);
+        return true;
+    }
+    return false;
+}

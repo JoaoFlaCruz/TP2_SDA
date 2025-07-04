@@ -131,6 +131,9 @@
     <ClInclude Include="Config.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="EndMessage.h">
+      <Filter>src\Message\StringMessage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SocketServer.cpp">
@@ -213,6 +216,9 @@
     </ClCompile>
     <ClCompile Include="TP2_SDA.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="EndMessage.cpp">
+      <Filter>src\Message\StringMessage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

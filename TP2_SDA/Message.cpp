@@ -24,6 +24,6 @@ std::string Message::toString() {
     return a_string_message->getMessage();
 }
 
-std::unique_ptr<StringMessage>  Message::getStringMessage() {
-    return (std::unique_ptr<StringMessage>) a_string_message;
+StringMessage* Message::getStringMessage() {
+    return (StringMessage*)a_string_message;
 }

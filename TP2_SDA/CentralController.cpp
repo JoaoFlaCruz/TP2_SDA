@@ -24,12 +24,13 @@ void CentralController::consumeMessages() {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         if (!a_message_stack->isEmpty()) {
             std::lock_guard<std::mutex> lock(a_mutex);
-            std::unique_ptr<Message> m = a_message_stack->getNext();
+            std::unique_ptr<SocketMessage> m = a_message_stack->getNext();
             log_buffer->addMessage(m->toString());
+            handleMessage(std::move(m));
         }
     }
 }
 
-void CentralController::handleMessages(Message p_message) {
-
+void CentralController::handleMessage(std::unique_ptr<SocketMessage> p_message) {
+    p_message->send();
 }

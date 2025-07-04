@@ -145,3 +145,7 @@ bool OpcItem::writeValue(const std::string& p_value) {
 	pIOPCSyncIO->Release();
 	return true;
 }
+
+std::string OpcItem::getValue() {
+	return a_item_value.empty() ? "0" : a_item_value;
+}

@@ -1,13 +1,14 @@
 #pragma once
-
+#define WIN32_LEAN_AND_MEAN
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <windows.h>
 #include <iostream>
 #include <process.h>
 #include <mutex>
-#include "MessageSocketServer.h"
-#include "LogBuffer.h";
+#include "LogBuffer.h"
+#include <thread>
+#include <chrono>
 
 #pragma comment(lib, "ws2_32.lib")
 
@@ -29,5 +30,6 @@ public:
     void acceptMessages();
 	void sendMessage(const std::string& p_message);
     void closeSocket();
+    std::string formatMessage(const std::string& raw);
 };
 

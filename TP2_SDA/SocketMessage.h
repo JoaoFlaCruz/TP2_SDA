@@ -1,7 +1,10 @@
 #pragma once
 #include "Message.h"
 #include "MessageSocketServer.h"
-#include "LogBuffer.h";
+#include "MessageStack.h"
+#include "LogBuffer.h"
+
+class MessageStack;
 
 class SocketMessage :
     public Message
@@ -12,4 +15,5 @@ protected:
 public:
 	SocketMessage(std::string p_message, MessageSocketServer* p_socket_server);
 	~SocketMessage();
+	bool send();
 };
