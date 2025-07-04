@@ -13,11 +13,16 @@
 #ifndef _SOCDATACALLBACK_H
 #define _SOCDATACALLBACK_H
 
+class OpcGroup;
+
 // **************************************************************************
 class SOCDataCallback : public IOPCDataCallback
 	{
+	private:
+		OpcGroup* a_group;
+
 	public:
-		SOCDataCallback ();
+		SOCDataCallback(OpcGroup* group);
 		~SOCDataCallback ();
 
 		// IUnknown Methods

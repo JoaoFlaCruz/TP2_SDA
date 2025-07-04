@@ -10,11 +10,12 @@
 #include <stdio.h>
 #include "SOCDataCallback.h"
 #include "SOCWrapperFunctions.h"
+#include "../OpcGroup.h"
 
 extern UINT OPC_DATA_TIME;
 
 //	Constructor.  Reference count is initialized to zero.
-SOCDataCallback::SOCDataCallback () : m_cnRef (0)
+SOCDataCallback::SOCDataCallback (OpcGroup* p_group) : m_cnRef (0), a_group(p_group)
 	{
 	}
 
@@ -102,7 +103,7 @@ HRESULT STDMETHODCALLTYPE SOCDataCallback::OnDataChange(
 	SYSTEMTIME st;
     char szLocalDate[255], szLocalTime[255];
 	bool status;
-	char buffer[100];
+	char buffer[500];
 	WORD quality;
 
 	// Validate arguments.  Return with "invalid argument" error code 
@@ -146,6 +147,11 @@ HRESULT STDMETHODCALLTYPE SOCDataCallback::OnDataChange(
 			GetDateFormat(LOCALE_SYSTEM_DEFAULT, DATE_SHORTDATE, &st, NULL, szLocalDate, 255);
 			GetTimeFormat(LOCALE_SYSTEM_DEFAULT, 0, &st, NULL, szLocalTime, 255);
 			printf(" Time: %s %s\n", szLocalDate, szLocalTime);
+
+			OpcItem* item = a_group->getItemByClientHandle(phClientItems[dwItem]);
+			if (item) {
+				item->handleDataChange(buffer, quality, st);
+			}
 		}
 		else printf ("IOPCDataCallback: Unsupported item type\n");
 	}

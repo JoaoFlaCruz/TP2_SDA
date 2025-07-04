@@ -1,4 +1,5 @@
 #include "OpcGroup.h"
+#include "SimpleOPCClient_V3/SOCDataCallback.h"
 
 OpcGroup::OpcGroup(std::string a_group_name, IOPCServer* p_iopc_server)
     : a_group_name(a_group_name),
@@ -116,9 +117,12 @@ bool OpcGroup::addItem(const std::string p_item_name)
     if (a_items.find(p_item_name) != a_items.end())
         return false;
 
-    a_items[p_item_name] = std::make_unique<OpcItem>(p_item_name, a_iopc_item_mgt);
+    auto item = std::make_unique<OpcItem>(p_item_name, a_iopc_item_mgt);
+    a_handle_to_item[item->getClientHandle()] = item.get();
+    a_items[p_item_name] = std::move(item);
     return true;
 }
+
 
 OpcItem* OpcGroup::getItem(const std::string p_item_name)
 {
@@ -197,7 +201,7 @@ void OpcGroup::cancelDataCallback(IConnectionPoint* pIConnectionPoint, DWORD dwC
 void OpcGroup::startCallback() {
     LogBuffer* log_buffer = LogBuffer::getInstance();
 
-    a_soc_data_callback = new SOCDataCallback();
+    a_soc_data_callback = new SOCDataCallback(this);
     a_soc_data_callback->AddRef();
 
     log_buffer->addMessage("Preparando IConnectionPoint callback para o grupo " + a_group_name);
@@ -215,4 +219,11 @@ std::string OpcGroup::msgToString(const MSG& msg) {
         << ", time=" << std::dec << msg.time
         << ", pt=(" << msg.pt.x << "," << msg.pt.y << ") }";
     return oss.str();
+}
+
+OpcItem* OpcGroup::getItemByClientHandle(OPCHANDLE p_item_handle) {
+    auto it = a_handle_to_item.find(p_item_handle);
+    if (it != a_handle_to_item.end())
+        return it->second;
+    return nullptr;
 }

@@ -15,13 +15,14 @@
 #include "SimpleOPCClient_V3/opcda.h"
 #include "SimpleOPCClient_V3/opcerror.h"
 #include "SimpleOPCClient_V3/SOCAdviseSink.h"
-#include "SimpleOPCClient_V3/SOCDataCallback.h"
 #include "SimpleOPCClient_V3/SOCWrapperFunctions.h"
 
 #include "Config.h"
 #include "OpcConstants.h"
 #include "OpcItem.h"
 #include "LogBuffer.h"
+
+class SOCDataCallback;
 
 class OpcGroup {
 private:
@@ -36,6 +37,9 @@ private:
     IConnectionPoint* a_iconnection_point = NULL;
     DWORD a_dw_cookie = 0;
     SOCDataCallback* a_soc_data_callback = nullptr;
+
+    std::unordered_map<OPCHANDLE, OpcItem*> a_handle_to_item;
+
 
     void setDataCallBack(
         IUnknown* pGroupIUnknown,
@@ -53,6 +57,7 @@ public:
     bool removeItem(const std::string p_item_name);
     void startCallback();
     std::string msgToString(const MSG& msg);
+    OpcItem* getItemByClientHandle(OPCHANDLE p_item_handle);
 
     bool setActive();
     bool setInactive();

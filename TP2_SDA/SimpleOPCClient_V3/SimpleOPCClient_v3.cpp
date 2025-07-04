@@ -160,7 +160,7 @@ void main_dep(void)
 	// setup the callback.
 	IConnectionPoint* pIConnectionPoint = NULL; //pointer to IConnectionPoint Interface
 	DWORD dwCookie = 0;
-	SOCDataCallback* pSOCDataCallback = new SOCDataCallback();
+	SOCDataCallback* pSOCDataCallback = new SOCDataCallback(nullptr);
 	pSOCDataCallback->AddRef();
 
 	printf("Setting up the IConnectionPoint callback connection...\n");

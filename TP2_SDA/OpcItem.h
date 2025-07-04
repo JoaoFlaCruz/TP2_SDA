@@ -4,6 +4,8 @@
 #include <string>
 #include <memory>
 #include <random>
+#include <iomanip>
+#include <sstream>
 
 #include <atlbase.h>
 #include <iostream>
@@ -26,13 +28,16 @@ class OpcItem {
 public:
 	std::string a_item_name;
 	std::string a_item_value = "";
-	std::string a_item_type = "";
+	std::string a_item_quality = "";
+	std::string a_item_timestamp = "";
 
 	OPCHANDLE a_client_handle_item = NULL;
 	OPCHANDLE a_server_handle_item = NULL;
 	IOPCServer* a_iopc_server = NULL;
 	IOPCItemMgt* a_iopc_item_mgt = NULL;
-//public:
+public:
 	OpcItem(std::string p_item_name, IOPCItemMgt* p_iopc_item_mgt);
 	~OpcItem();
+	void handleDataChange(const char* p_value, WORD p_quality, SYSTEMTIME p_timestamp);
+	OPCHANDLE getClientHandle();
 };

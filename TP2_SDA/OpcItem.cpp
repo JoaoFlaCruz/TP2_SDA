@@ -1,4 +1,4 @@
-#include "OpcItem.h"
+﻿#include "OpcItem.h"
 
 OpcItem::OpcItem(std::string p_item_name, IOPCItemMgt* p_iopc_item_mgt)
 	: a_item_name(p_item_name),
@@ -70,4 +70,35 @@ OpcItem::~OpcItem() {
 	errors = NULL;
 
 	log_buffer->addMessage("Item " + a_item_name + " removido com suscesso ao servidor OPC DA");
+}
+
+void OpcItem::handleDataChange(const char* p_value, WORD p_quality, SYSTEMTIME p_timestamp) {
+	LogBuffer* log_buffer = LogBuffer::getInstance();
+
+	// Armazena o valor recebido como string
+	a_item_value = p_value;
+
+	// Converte qualidade para string hexadecimal
+	std::stringstream ss_quality;
+	ss_quality << "0x" << std::hex << std::uppercase << static_cast<int>(p_quality);
+	a_item_quality = ss_quality.str();
+
+	// Converte SYSTEMTIME para string (hh:mm:ss.mmm)
+	std::ostringstream oss_time;
+	oss_time << std::setfill('0')
+		<< std::setw(2) << p_timestamp.wHour << ":"
+		<< std::setw(2) << p_timestamp.wMinute << ":"
+		<< std::setw(2) << p_timestamp.wSecond << "."
+		<< std::setw(3) << p_timestamp.wMilliseconds;
+
+	a_item_timestamp = oss_time.str();
+
+	// Log final
+	log_buffer->addMessage("ITEM [" + a_item_name + "] UPDATE: Valor [" + a_item_value +
+		"], Qualidade: [" + a_item_quality +
+		"] Timestamp: [" + a_item_timestamp + "]");
+}
+
+OPCHANDLE OpcItem::getClientHandle() {
+	return a_client_handle_item;
 }

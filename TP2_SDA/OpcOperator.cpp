@@ -18,7 +18,7 @@ OpcOperator::OpcOperator() {
 	group->startCallback();
 
 	a_server->addGroup("GrupoEscritaSincrona");
-	OpcGroup* group = a_server->getGroup("GrupoEscritaSincrona");
+	group = a_server->getGroup("GrupoEscritaSincrona");
 	group->addItem("Bucket Brigade.Int2");
 	group->addItem("Bucket Brigade.Int4");
 	group->addItem("Bucket Brigade.Real4");
@@ -31,25 +31,10 @@ OpcOperator::~OpcOperator() {
 }
 
 OpcOperator* OpcOperator::getInstance() {
-	OpcOperator instance;
+	static OpcOperator instance;
 	return &instance;
 }
 
 void OpcOperator::readMessages() {
-	LogBuffer* log_buffer = LogBuffer::getInstance();
-
-	MSG msg;
-	std::string msg_tr;
-	int bRet;
-	OpcGroup* group = a_server->getGroup("GrupoLeituraAssincrona");
-	do {
-		bRet = GetMessage(&msg, NULL, 0, 0);
-		if (!bRet) {
-			log_buffer->addMessage("Failed to get windows message! Error code = " + std::to_string(GetLastError()));
-		}
-		TranslateMessage(&msg);
-		msg_tr = group->msgToString(msg);
-		log_buffer->addMessage(msg_tr);
-		DispatchMessage(&msg);
-	} while (true);
+	
 }

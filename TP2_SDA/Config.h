@@ -21,7 +21,7 @@
 #define OPC_SERVER_PROG_ID "Matrikon.OPC.Simulation.1";
 
 // Request Update Rate - Taxa de atualização das variáveis de processo pelo Servidor OPC DA (em milisegundos)
-#define OPC_SERVER_REQ_UPDATE_RATE 1000;
+#define OPC_SERVER_REQ_UPDATE_RATE 5000;
 
 //  Porta TCP que será disponibilizada pelo servidor TCP
 #define TCP_PORT 4885;
