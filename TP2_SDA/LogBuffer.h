@@ -6,6 +6,7 @@
 #include <mutex>
 #include <chrono>
 #include <ctime>
+#include <thread>
 #include <iomanip>
 
 #include "Update.h"

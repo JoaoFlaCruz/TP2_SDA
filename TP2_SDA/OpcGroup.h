@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include <string>
+#include <sstream>
 #include <memory>
 #include <random>
 
@@ -27,18 +28,31 @@ private:
     std::unordered_map<std::string, std::unique_ptr<OpcItem>> a_items;
     std::string a_group_name;
 
-    OPCHANDLE a_client_handle_group;
-    OPCHANDLE a_server_handle_group;
+    OPCHANDLE a_client_handle_group = NULL;
+    OPCHANDLE a_server_handle_group = NULL;
     IOPCServer* a_iopc_server = NULL;
     IOPCItemMgt* a_iopc_item_mgt = NULL;
 
+    IConnectionPoint* a_iconnection_point = NULL;
+    DWORD a_dw_cookie = 0;
+    SOCDataCallback* a_soc_data_callback = nullptr;
+
+    void setDataCallBack(
+        IUnknown* pGroupIUnknown,
+        IOPCDataCallback* pSOCDataCallback,
+        IConnectionPoint*& pIConnectionPoint,
+        DWORD* pdwCookie);
+    void cancelDataCallback(IConnectionPoint* pIConnectionPoint, DWORD dwCookie);
+
 public:
-    OpcGroup(std::string p_group_name, IOPCServer* p_iopc_server, IOPCItemMgt* p_iopc_item_mgt);
+    OpcGroup(std::string p_group_name, IOPCServer* p_iopc_server);
     ~OpcGroup();
 
     bool addItem(const std::string p_item_name);
     OpcItem* getItem(const std::string p_item_name);
     bool removeItem(const std::string p_item_name);
+    void startCallback();
+    std::string msgToString(const MSG& msg);
 
     bool setActive();
     bool setInactive();

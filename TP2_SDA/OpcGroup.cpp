@@ -1,9 +1,8 @@
 #include "OpcGroup.h"
 
-OpcGroup::OpcGroup(std::string a_group_name, IOPCServer* p_iopc_server, IOPCItemMgt* p_iopc_item_mgt)
+OpcGroup::OpcGroup(std::string a_group_name, IOPCServer* p_iopc_server)
     : a_group_name(a_group_name),
-    a_iopc_server(p_iopc_server),
-    a_iopc_item_mgt(p_iopc_item_mgt)
+    a_iopc_server(p_iopc_server)
 {
     LogBuffer* log_buffer = LogBuffer::getInstance();
 
@@ -106,7 +105,6 @@ bool OpcGroup::setInactive() {
     if (hr != S_OK)
         log_buffer->addMessage("Failed call to IOPCGroupMgt::SetState. Error = " + std::to_string(hr));
     else
-        // Free the pointer since we will not use it anymore.
         pIOPCGroupStateMgt->Release();
 
     log_buffer->addMessage("Grupo " + a_group_name + " foi inativado [INATIVO]");
@@ -118,8 +116,7 @@ bool OpcGroup::addItem(const std::string p_item_name)
     if (a_items.find(p_item_name) != a_items.end())
         return false;
 
-    // Criação do item com tipo genérico "UNDEFINED"
-    a_items[p_item_name] = std::make_unique<OpcItem>(p_item_name, "UNDEFINED", a_group_name);
+    a_items[p_item_name] = std::make_unique<OpcItem>(p_item_name, a_iopc_item_mgt);
     return true;
 }
 
@@ -144,4 +141,78 @@ bool OpcGroup::addTree(std::string p_string)
 std::string OpcGroup::getTree()
 {
     return "";
+}
+
+void OpcGroup::setDataCallBack(
+    IUnknown* pGroupIUnknown,
+    IOPCDataCallback* pSOCDataCallback,
+    IConnectionPoint*& pIConnectionPoint,
+    DWORD* pdwCookie)
+{
+    LogBuffer* log_buffer = LogBuffer::getInstance();
+
+    HRESULT hr;
+
+    IConnectionPointContainer* pIConnPtCont = NULL;
+
+    hr = pGroupIUnknown->QueryInterface(__uuidof(pIConnPtCont), (void**)&pIConnPtCont);
+    if (hr != S_OK) {
+        log_buffer->addMessage("Could not obtain a pointer to IConnectionPointContainer. Error = " + std::to_string(hr));
+        return;
+    }
+
+    hr = pIConnPtCont->FindConnectionPoint(IID_IOPCDataCallback, &pIConnectionPoint);
+    if (hr != S_OK) {
+        log_buffer->addMessage("Failed call to FindConnectionPoint. Error = " + std::to_string(hr));
+        return;
+    }
+
+    hr = pIConnectionPoint->Advise(pSOCDataCallback, pdwCookie);
+    if (hr != S_OK) {
+        log_buffer->addMessage("Failed call to IConnectionPoint::Advise. Error = " + std::to_string(hr));
+        *pdwCookie = 0;
+    }
+
+    pIConnPtCont->Release();
+    return;
+}
+
+void OpcGroup::cancelDataCallback(IConnectionPoint* pIConnectionPoint, DWORD dwCookie)
+{
+    LogBuffer* log_buffer = LogBuffer::getInstance();
+
+    HRESULT hr;
+
+    hr = pIConnectionPoint->Unadvise(dwCookie);
+    if (hr != S_OK) {
+        log_buffer->addMessage("Failed call to IDataObject::DUnAdvise. Error = " + std::to_string(hr));
+        dwCookie = 0;
+    }
+
+    pIConnectionPoint->Release();
+    log_buffer->addMessage("IConnectionPoint callback desativado para o grupo " + a_group_name);
+    return;
+}
+
+void OpcGroup::startCallback() {
+    LogBuffer* log_buffer = LogBuffer::getInstance();
+
+    a_soc_data_callback = new SOCDataCallback();
+    a_soc_data_callback->AddRef();
+
+    log_buffer->addMessage("Preparando IConnectionPoint callback para o grupo " + a_group_name);
+    setDataCallBack(a_iopc_item_mgt, a_soc_data_callback, a_iconnection_point, &a_dw_cookie);
+
+    log_buffer->addMessage("IConnectionPoint callback configurado para o grupo " + a_group_name);
+}
+
+std::string OpcGroup::msgToString(const MSG& msg) {
+    std::ostringstream oss;
+    oss << "MSG { hwnd=" << msg.hwnd
+        << ", message=0x" << std::hex << msg.message
+        << ", wParam=0x" << std::hex << msg.wParam
+        << ", lParam=0x" << std::hex << msg.lParam
+        << ", time=" << std::dec << msg.time
+        << ", pt=(" << msg.pt.x << "," << msg.pt.y << ") }";
+    return oss.str();
 }

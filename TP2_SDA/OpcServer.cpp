@@ -25,11 +25,12 @@ OpcServer::OpcServer(std::string p_server_name)
 
     a_iopc_server = (IOPCServer*) queue[0].pItf;
 
-    log_buffer->addMessage("Servidor OPC DA " + p_server_name + " vinculado");
+    log_buffer->addMessage("Servidor OPC DA " + a_server_name + " vinculado");
 }
 
 OpcServer::~OpcServer() {
-    // Vazio
+    LogBuffer* log_buffer = LogBuffer::getInstance();
+    log_buffer->addMessage("Encerrando conexão com o servidor " + a_server_name);
 }
 
 bool OpcServer::addGroup(const std::string p_group_name)
@@ -37,7 +38,7 @@ bool OpcServer::addGroup(const std::string p_group_name)
     if (a_groups.find(p_group_name) != a_groups.end())
         return false;
 
-    a_groups[p_group_name] = std::make_unique<OpcGroup>(p_group_name, a_iopc_server, a_iopc_item_mgt);
+    a_groups[p_group_name] = std::make_unique<OpcGroup>(p_group_name, (IOPCServer*&) a_iopc_server);
     return true;
 }
 

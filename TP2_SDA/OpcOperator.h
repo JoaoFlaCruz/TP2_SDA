@@ -24,5 +24,6 @@ private:
 	~OpcOperator();
 public:
 	static OpcOperator* getInstance();
+	void readMessages();
 };
 

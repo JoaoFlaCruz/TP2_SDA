@@ -25,8 +25,7 @@ private:
     std::unordered_map<std::string, std::unique_ptr<OpcGroup>> a_groups;
     std::string a_server_name;
 
-    IOPCServer* a_iopc_server = NULL;   //pointer to IOPServer interface
-    IOPCItemMgt* a_iopc_item_mgt = NULL; //pointer to IOPCItemMgt interface
+    IOPCServer* a_iopc_server = NULL;
 
 public:
     OpcServer(std::string p_server_name);

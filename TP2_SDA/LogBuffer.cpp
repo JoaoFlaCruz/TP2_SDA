@@ -13,8 +13,9 @@ void LogBuffer::addMessage(const std::string& p_msg) {
     std::tm tm_now;
     localtime_s(&tm_now, &t_now);
 
+    // Obtém o ID da thread
     std::ostringstream oss;
-    oss << "[" << std::put_time(&tm_now, "%H:%M:%S") << "] " << p_msg;
+    oss << "[" << std::put_time(&tm_now, "%H:%M:%S") << "][TID " << std::this_thread::get_id() << "] " << p_msg;
 
     if (a_messages.size() >= a_maxSize)
         a_messages.pop_front();
@@ -22,6 +23,7 @@ void LogBuffer::addMessage(const std::string& p_msg) {
 
     Update::getInstance()->triggerMainWindow();
 }
+
 
 std::string LogBuffer::getAllMessages() {
     std::lock_guard<std::mutex> lock(a_mutex);

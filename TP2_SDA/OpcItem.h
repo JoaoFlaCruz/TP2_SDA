@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <string>
 #include <memory>
+#include <random>
 
 #include <atlbase.h>
 #include <iostream>
@@ -17,16 +18,21 @@
 #include "SimpleOPCClient_V3/SOCWrapperFunctions.h"
 
 #include "OpcConstants.h"
+#include "LogBuffer.h"
+
+#define VT VT_R4
 
 class OpcItem {
-private:
-	std::string a_item_name;
-	std::string a_upper_name;
-	std::string a_item_value;
-	std::string a_item_type;
-
-	OPCHANDLE a_handle_item;  // server handle to the item
 public:
-	OpcItem(std::string p_item_name, std::string p_item_type, std::string p_upper_name);
+	std::string a_item_name;
+	std::string a_item_value = "";
+	std::string a_item_type = "";
+
+	OPCHANDLE a_client_handle_item = NULL;
+	OPCHANDLE a_server_handle_item = NULL;
+	IOPCServer* a_iopc_server = NULL;
+	IOPCItemMgt* a_iopc_item_mgt = NULL;
+//public:
+	OpcItem(std::string p_item_name, IOPCItemMgt* p_iopc_item_mgt);
 	~OpcItem();
 };
