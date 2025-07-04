@@ -102,3 +102,46 @@ void OpcItem::handleDataChange(const char* p_value, WORD p_quality, SYSTEMTIME p
 OPCHANDLE OpcItem::getClientHandle() {
 	return a_client_handle_item;
 }
+
+bool OpcItem::writeValue(const std::string& p_value) {
+	LogBuffer* log_buffer = LogBuffer::getInstance();
+
+	a_item_value = p_value;
+
+	IOPCSyncIO* pIOPCSyncIO = nullptr;
+	HRESULT hr = a_iopc_item_mgt->QueryInterface(__uuidof(IOPCSyncIO), (void**)&pIOPCSyncIO);
+
+	if (hr != S_OK || !pIOPCSyncIO) {
+		log_buffer->addMessage("Erro ao obter IOPCSyncIO para escrita síncrona.");
+		return false;
+	}
+
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	std::wstring w_valor = converter.from_bytes(a_item_value);
+
+	VARIANT var;
+	VariantInit(&var);
+	var.vt = VT_BSTR;
+	var.bstrVal = SysAllocString(w_valor.c_str());
+
+	OPCHANDLE hServer = a_server_handle_item;
+	HRESULT* errors = nullptr;
+
+	hr = pIOPCSyncIO->Write(1, &a_server_handle_item, &var, &errors);
+
+	VariantClear(&var);
+
+	if (hr != S_OK || errors[0] != S_OK) {
+		log_buffer->addMessage("Erro ao escrever valor [" + a_item_value + "] no item " + a_item_name +
+			". HRESULT = " + std::to_string(hr) +
+			", OPC Error = " + std::to_string(errors[0]));
+		CoTaskMemFree(errors);
+		pIOPCSyncIO->Release();
+		return false;
+	}
+
+	log_buffer->addMessage("Valor \"" + a_item_value + "\" escrito com sucesso no item " + a_item_name);
+	CoTaskMemFree(errors);
+	pIOPCSyncIO->Release();
+	return true;
+}

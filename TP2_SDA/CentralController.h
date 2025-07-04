@@ -19,5 +19,6 @@ protected:
 public:
 	static CentralController* getInstance();
 	void consumeMessages();
+	void handleMessages(Message p_message);
 };
 

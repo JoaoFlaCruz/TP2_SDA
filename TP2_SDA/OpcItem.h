@@ -40,4 +40,5 @@ public:
 	~OpcItem();
 	void handleDataChange(const char* p_value, WORD p_quality, SYSTEMTIME p_timestamp);
 	OPCHANDLE getClientHandle();
+	bool writeValue(const std::string& p_value);
 };

@@ -29,3 +29,7 @@ void CentralController::consumeMessages() {
         }
     }
 }
+
+void CentralController::handleMessages(Message p_message) {
+
+}
