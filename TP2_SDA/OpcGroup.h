@@ -60,7 +60,4 @@ public:
 
     bool setActive();
     bool setInactive();
-    bool addTree(std::string p_string);
-    std::string getTree();
-
 };

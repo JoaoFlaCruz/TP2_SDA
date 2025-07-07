@@ -34,8 +34,4 @@ public:
     bool addGroup(const std::string p_group_name);
     OpcGroup* getGroup(const std::string p_group_name);
     bool removeGroup(const std::string p_group_name);
-
-    bool addTree(const std::string p_string);
-    std::string getTree();
-    std::string readData();
 };

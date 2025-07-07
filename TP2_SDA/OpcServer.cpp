@@ -54,21 +54,3 @@ bool OpcServer::removeGroup(const std::string p_group_name)
 {
     return a_groups.erase(p_group_name) > 0;
 }
-
-bool OpcServer::addTree(const std::string p_string)
-{
-    // Vazio
-    return true;
-}
-
-std::string OpcServer::getTree()
-{
-    // Vazio
-    return "";
-}
-
-std::string OpcServer::readData()
-{
-    // Vazio
-    return "";
-}

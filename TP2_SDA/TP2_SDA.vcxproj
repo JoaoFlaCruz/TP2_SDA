@@ -157,11 +157,9 @@
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageSocketServer.h" />
     <ClInclude Include="MessageStack.h" />
-    <ClInclude Include="OpcDataRequest.h" />
     <ClInclude Include="OpcGroup.h" />
     <ClInclude Include="OpcItem.h" />
     <ClInclude Include="OpcOperator.h" />
-    <ClInclude Include="OpcQuery.h" />
     <ClInclude Include="OpcServer.h" />
     <ClInclude Include="RDPMessage.h" />
     <ClInclude Include="Resource.h" />
@@ -190,11 +188,9 @@
     <ClCompile Include="MessageSocketClient.cpp" />
     <ClCompile Include="MessageSocketServer.cpp" />
     <ClCompile Include="MessageStack.cpp" />
-    <ClCompile Include="OpcDataRequest.cpp" />
     <ClCompile Include="OpcGroup.cpp" />
     <ClCompile Include="OpcItem.cpp" />
     <ClCompile Include="OpcOperator.cpp" />
-    <ClCompile Include="OpcQuery.cpp" />
     <ClCompile Include="OpcServer.cpp" />
     <ClCompile Include="RDPMessage.cpp" />
     <ClCompile Include="SimpleOPCClient_V3\opcda_i.c" />

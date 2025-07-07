@@ -95,14 +95,8 @@
     <ClInclude Include="OpcServer.h">
       <Filter>src\Opc</Filter>
     </ClInclude>
-    <ClInclude Include="OpcDataRequest.h">
-      <Filter>src\Opc</Filter>
-    </ClInclude>
     <ClInclude Include="Update.h">
       <Filter>src\SystemSingleton</Filter>
-    </ClInclude>
-    <ClInclude Include="OpcQuery.h">
-      <Filter>src\Opc</Filter>
     </ClInclude>
     <ClInclude Include="SimpleOPCClient_V3\opcda.h">
       <Filter>src\Opc\SimpleOPCClient_V3</Filter>
@@ -187,14 +181,8 @@
     <ClCompile Include="OpcServer.cpp">
       <Filter>src\Opc</Filter>
     </ClCompile>
-    <ClCompile Include="OpcDataRequest.cpp">
-      <Filter>src\Opc</Filter>
-    </ClCompile>
     <ClCompile Include="Update.cpp">
       <Filter>src\SystemSingleton</Filter>
-    </ClCompile>
-    <ClCompile Include="OpcQuery.cpp">
-      <Filter>src\Opc</Filter>
     </ClCompile>
     <ClCompile Include="SimpleOPCClient_V3\opcda_i.c">
       <Filter>src\Opc\SimpleOPCClient_V3</Filter>

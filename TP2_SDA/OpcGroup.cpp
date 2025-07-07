@@ -138,16 +138,6 @@ bool OpcGroup::removeItem(const std::string p_item_name)
     return a_items.erase(p_item_name) > 0;
 }
 
-bool OpcGroup::addTree(std::string p_string)
-{
-    return true;
-}
-
-std::string OpcGroup::getTree()
-{
-    return "";
-}
-
 void OpcGroup::setDataCallBack(
     IUnknown* pGroupIUnknown,
     IOPCDataCallback* pSOCDataCallback,

@@ -39,7 +39,7 @@ public:
 	OpcItem(std::string p_item_name, IOPCItemMgt* p_iopc_item_mgt);
 	~OpcItem();
 	void handleDataChange(const char* p_value, WORD p_quality, SYSTEMTIME p_timestamp);
-	OPCHANDLE getClientHandle();
+	OPCHANDLE getClientHandle();	
 	bool writeValue(const std::string& p_value);
 	std::string getValue();
 };

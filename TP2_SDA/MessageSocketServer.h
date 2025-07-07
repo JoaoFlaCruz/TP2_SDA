@@ -29,8 +29,6 @@ public:
     ~MessageSocketServer();
 
     void acceptMessages();
-	void sendMessage(const std::string& p_message);
     void closeSocket();
-    std::string formatMessage(const std::string& raw);
 };
 
