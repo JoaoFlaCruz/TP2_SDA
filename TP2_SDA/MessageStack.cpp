@@ -1,5 +1,5 @@
 #include "MessageStack.h"
-#include "MessageSocketServer.h"
+#include "MessageSocketClient.h"
 #include "SocketMessage.h"
 
 MessageStack* MessageStack::getInstance() {
@@ -7,7 +7,7 @@ MessageStack* MessageStack::getInstance() {
     return &instance;
 }
 
-bool MessageStack::insertSocketMessage(std::string p_message, MessageSocketServer* p_socket_server) {
+bool MessageStack::insertSocketMessage(std::string p_message, MessageSocketClient* p_socket_server) {
     std::lock_guard<std::mutex> lock(a_mutex);
 
     if (isFull()) {

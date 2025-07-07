@@ -3,7 +3,8 @@
 
 OpcGroup::OpcGroup(std::string a_group_name, IOPCServer* p_iopc_server)
     : a_group_name(a_group_name),
-    a_iopc_server(p_iopc_server)
+    a_iopc_server(p_iopc_server),
+    SOCDataCallback(this)
 {
     LogBuffer* log_buffer = LogBuffer::getInstance();
 
@@ -201,11 +202,10 @@ void OpcGroup::cancelDataCallback(IConnectionPoint* pIConnectionPoint, DWORD dwC
 void OpcGroup::startCallback() {
     LogBuffer* log_buffer = LogBuffer::getInstance();
 
-    a_soc_data_callback = new SOCDataCallback(this);
-    a_soc_data_callback->AddRef();
+    AddRef();
 
     log_buffer->addMessage("Preparando IConnectionPoint callback para o grupo " + a_group_name);
-    setDataCallBack(a_iopc_item_mgt, a_soc_data_callback, a_iconnection_point, &a_dw_cookie);
+    setDataCallBack(a_iopc_item_mgt, this, a_iconnection_point, &a_dw_cookie);
 
     log_buffer->addMessage("IConnectionPoint callback configurado para o grupo " + a_group_name);
 }
@@ -227,3 +227,5 @@ OpcItem* OpcGroup::getItemByClientHandle(OPCHANDLE p_item_handle) {
         return it->second;
     return nullptr;
 }
+
+

@@ -32,8 +32,14 @@ StringMessage* EDMessage::buildSelf(const std::vector<std::string>& values) {
 }
 
 StringMessage* EDMessage::getResponse() {
-    OpcOperator* opc_operator = OpcOperator::getInstance();
-    opc_operator->updateData(a_op_number,a_fab_recipe, a_piece_type, a_cell_id);
+    OpcOperator::getInstance()->enqueue(OpcOperator::Command{ [
+        op_number = a_op_number,
+        fab_recipe = a_fab_recipe,
+        piece_type = a_piece_type,
+        cell_id = a_cell_id
+    ]() {
+        OpcOperator::getInstance()->updateData(op_number, fab_recipe, piece_type, cell_id);
+    } });
     std::vector<std::string> data;
     data.insert(data.begin(), std::to_string(a_seq_message_number + 1));
     return (StringMessage*) CMessage_ACK::buildSelf(data);

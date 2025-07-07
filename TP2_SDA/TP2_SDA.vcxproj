@@ -151,7 +151,7 @@
     <ClInclude Include="EndMessage.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Config.h" />
-    <ClInclude Include="Config.h" />
+    <ClInclude Include="MessageSocketClient.h" />
     <ClInclude Include="OpcConstants.h" />
     <ClInclude Include="LogBuffer.h" />
     <ClInclude Include="Message.h" />
@@ -187,6 +187,7 @@
     <ClCompile Include="EndMessage.cpp" />
     <ClCompile Include="LogBuffer.cpp" />
     <ClCompile Include="Message.cpp" />
+    <ClCompile Include="MessageSocketClient.cpp" />
     <ClCompile Include="MessageSocketServer.cpp" />
     <ClCompile Include="MessageStack.cpp" />
     <ClCompile Include="OpcDataRequest.cpp" />

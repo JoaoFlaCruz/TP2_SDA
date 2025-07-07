@@ -24,7 +24,7 @@
 
 class SOCDataCallback;
 
-class OpcGroup {
+class OpcGroup : SOCDataCallback {
 private:
     std::unordered_map<std::string, std::unique_ptr<OpcItem>> a_items;
     std::string a_group_name;
@@ -36,7 +36,6 @@ private:
 
     IConnectionPoint* a_iconnection_point = NULL;
     DWORD a_dw_cookie = 0;
-    SOCDataCallback* a_soc_data_callback = nullptr;
 
     std::unordered_map<OPCHANDLE, OpcItem*> a_handle_to_item;
 
@@ -63,4 +62,5 @@ public:
     bool setInactive();
     bool addTree(std::string p_string);
     std::string getTree();
+
 };

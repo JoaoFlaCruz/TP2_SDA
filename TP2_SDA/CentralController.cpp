@@ -21,7 +21,6 @@ void CentralController::consumeMessages() {
     }
 
     while (true) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
         if (!a_message_stack->isEmpty()) {
             std::lock_guard<std::mutex> lock(a_mutex);
             std::unique_ptr<SocketMessage> m = a_message_stack->getNext();

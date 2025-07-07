@@ -18,8 +18,20 @@ StringMessage* RDPMessage::buildSelf(const std::vector<std::string>& values) {
 }
 
 StringMessage* RDPMessage::getResponse() {
-    OpcOperator* opc_operator = OpcOperator::getInstance();
-    std::vector<std::string> data = opc_operator->getData();
+    std::vector<std::string> data;
+
+    auto prom = std::make_shared<std::promise<std::vector<std::string>>>();
+    std::future<std::vector<std::string>> fut = prom->get_future();
+
+    OpcOperator::getInstance()->enqueue(OpcOperator::Command{
+        [prom]() {
+            std::vector<std::string> result = OpcOperator::getInstance()->getData();
+            prom->set_value(result);
+        }
+        });
+
+    data = fut.get();
     data.insert(data.begin(), std::to_string(a_seq_message_number + 1));
-    return (StringMessage*) DPMessage::buildSelf(data);
+
+    return DPMessage::buildSelf(data);
 }

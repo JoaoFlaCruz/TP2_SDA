@@ -6,7 +6,7 @@
 #include <mutex>
 #include "Message.h"
 
-class MessageSocketServer;
+class MessageSocketClient;
 class SocketMessage;
 
 class MessageStack {
@@ -24,7 +24,7 @@ private:
 public:
     static MessageStack* getInstance();
 
-    bool insertSocketMessage(std::string p_message, MessageSocketServer* p_socket_server);
+    bool insertSocketMessage(std::string p_message, MessageSocketClient* p_socket_server);
     std::unique_ptr<SocketMessage> getNext();
     bool isEmpty();
     bool isFull();

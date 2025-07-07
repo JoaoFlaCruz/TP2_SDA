@@ -125,14 +125,14 @@
     <ClInclude Include="OpcConstants.h">
       <Filter>src\Opc</Filter>
     </ClInclude>
-    <ClInclude Include="Config.h">
-      <Filter>src\Header</Filter>
+    <ClInclude Include="EndMessage.h">
+      <Filter>src\Message\StringMessage</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageSocketClient.h">
+      <Filter>src\Socket</Filter>
     </ClInclude>
     <ClInclude Include="Config.h">
       <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="EndMessage.h">
-      <Filter>src\Message\StringMessage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +219,9 @@
     </ClCompile>
     <ClCompile Include="EndMessage.cpp">
       <Filter>src\Message\StringMessage</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageSocketClient.cpp">
+      <Filter>src\Socket</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

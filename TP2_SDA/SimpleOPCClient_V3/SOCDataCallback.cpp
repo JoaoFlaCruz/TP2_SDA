@@ -11,6 +11,7 @@
 #include "SOCDataCallback.h"
 #include "SOCWrapperFunctions.h"
 #include "../OpcGroup.h"
+#include "../OpcOperator.h"
 
 extern UINT OPC_DATA_TIME;
 
@@ -148,10 +149,20 @@ HRESULT STDMETHODCALLTYPE SOCDataCallback::OnDataChange(
 			GetTimeFormat(LOCALE_SYSTEM_DEFAULT, 0, &st, NULL, szLocalTime, 255);
 			printf(" Time: %s %s\n", szLocalDate, szLocalTime);
 
-			OpcItem* item = a_group->getItemByClientHandle(phClientItems[dwItem]);
-			if (item) {
-				item->handleDataChange(buffer, quality, st);
-			}
+			auto timestamp = st;  // cópia porque SYSTEMTIME é uma struct
+
+			OpcOperator::getInstance()->enqueue(OpcOperator::Command{
+				[clientHandle = phClientItems[dwItem], value = std::string(buffer), quality, timestamp]() {
+					OpcGroup* group = OpcOperator::getInstance()->getServer()->getGroup("GrupoLeituraAssincrona");
+					if (group) {
+						OpcItem* item = group->getItemByClientHandle(clientHandle);
+						if (item) {
+							item->handleDataChange(value.c_str(), quality, timestamp);
+						}
+					}
+				}
+				});
+
 		}
 		else printf ("IOPCDataCallback: Unsupported item type\n");
 	}

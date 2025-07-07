@@ -150,7 +150,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        controller->consumeMessages();
        }).detach();
 
-   OpcOperator* opc_operator = OpcOperator::getInstance();
+   std::thread([]() {
+       OpcOperator* opc_operator = OpcOperator::getInstance();
+       }).detach(); 
 
    return TRUE;
 }

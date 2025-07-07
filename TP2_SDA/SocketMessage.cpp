@@ -1,12 +1,17 @@
 #include "SocketMessage.h"
 #include "MessageStack.h"
 
-SocketMessage::SocketMessage(std::string p_message, MessageSocketServer* p_socket_server)
+SocketMessage::SocketMessage(std::string p_message, MessageSocketClient* p_socket_server)
     : Message(p_message), a_socket_server(p_socket_server) {
     LogBuffer* log_buffer = LogBuffer::getInstance();
     std::vector<std::string> values = clipMessage(p_message);
 
     if (values.size() < 1) return;
+
+    if (values[0] == "end") {
+        a_string_message = EndMessage::buildSelf(values);
+        return;
+    }
 
     int code = std::stoi(values[0]);
     values.erase(values.begin());

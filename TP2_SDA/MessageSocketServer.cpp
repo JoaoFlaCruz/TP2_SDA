@@ -41,44 +41,9 @@ void MessageSocketServer::acceptMessages() {
             buffer[bytesReceived] = '\0';
             std::string msg(buffer);
 
-            MessageSocketServer* new_socket = new MessageSocketServer(a_client_socket);
+            MessageSocketClient* new_socket = new MessageSocketClient(a_client_socket);
 
             a_message_stack->insertSocketMessage(msg, new_socket);
         }
     }
-}
-
-void MessageSocketServer::sendMessage(const std::string& p_message) {
-    LogBuffer* log_buffer = LogBuffer::getInstance();
-
-    if (p_message == "end") {
-        //log_buffer->addMessage("Mensagem de encerramento recebida. Encerrando servidor...");
-        //delete this;
-        return;
-    }
-
-    std::string formatted_msg = formatMessage(p_message); // ajusta para 34 caracteres
-
-    log_buffer->addMessage("Enviando mensagem: " + p_message);
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
-
-    if (a_client_socket != INVALID_SOCKET) {
-        std::lock_guard<std::mutex> lock(a_mutex);
-        send(a_client_socket, formatted_msg.c_str(), static_cast<int>(formatted_msg.size()), 0);
-    }
-    else {
-        log_buffer->addMessage("Socket inválido, não foi possível enviar a mensagem.");
-    }
-}
-
-
-std::string MessageSocketServer::formatMessage(const std::string& raw) {
-    std::string msg = raw;
-    if (msg.size() < 34) {
-        msg.append(34 - msg.size(), ' '); // preenche com espaços
-    }
-    else if (msg.size() > 34) {
-        msg = msg.substr(0, 34); // trunca para 34 caracteres
-    }
-    return msg;
 }
