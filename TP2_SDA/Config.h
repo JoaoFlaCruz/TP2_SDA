@@ -25,3 +25,8 @@
 
 //  Porta TCP que será disponibilizada pelo servidor TCP
 #define TCP_PORT 4885;
+
+//  Tamanho dos buffers de log apresentados na interface (número de mensagens que podem ser armazenadas na fila)
+#define OPC_BUFFER_SIZE 100;
+#define TCP_BUFFER_SIZE 100;
+#define LOG_BUFFER_SIZE 100;

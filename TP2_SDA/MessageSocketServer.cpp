@@ -28,6 +28,7 @@ void MessageSocketServer::closeSocket() {
 
 void MessageSocketServer::acceptMessages() {
     LogBuffer* log_buffer = LogBuffer::getInstance();
+    LogTcp* log_tcp = LogTcp::getInstance();
     log_buffer->addMessage(std::string("Aguardando mensagens do cliente..."));
 
     while (true) {
@@ -43,6 +44,7 @@ void MessageSocketServer::acceptMessages() {
 
             MessageSocketClient* new_socket = new MessageSocketClient(a_client_socket);
 
+            log_tcp->addMessage(msg);
             a_message_stack->insertSocketMessage(msg, new_socket);
         }
     }

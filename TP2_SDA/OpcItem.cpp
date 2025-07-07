@@ -74,6 +74,7 @@ OpcItem::~OpcItem() {
 
 void OpcItem::handleDataChange(const char* p_value, WORD p_quality, SYSTEMTIME p_timestamp) {
 	LogBuffer* log_buffer = LogBuffer::getInstance();
+	LogOpc* log_opc = LogOpc::getInstance();
 
 	// Armazena o valor recebido como string
 	a_item_value = p_value;
@@ -94,6 +95,9 @@ void OpcItem::handleDataChange(const char* p_value, WORD p_quality, SYSTEMTIME p
 	a_item_timestamp = oss_time.str();
 
 	// Log final
+	log_opc->addMessage("CALLBACK: ITEM [" + a_item_name + "] UPDATE: Valor [" + a_item_value +
+		"], Qualidade: [" + a_item_quality +
+		"] Timestamp: [" + a_item_timestamp + "]");
 	log_buffer->addMessage("ITEM [" + a_item_name + "] UPDATE: Valor [" + a_item_value +
 		"], Qualidade: [" + a_item_quality +
 		"] Timestamp: [" + a_item_timestamp + "]");
@@ -105,6 +109,7 @@ OPCHANDLE OpcItem::getClientHandle() {
 
 bool OpcItem::writeValue(const std::string& p_value) {
 	LogBuffer* log_buffer = LogBuffer::getInstance();
+	LogOpc* log_opc = LogOpc::getInstance();
 
 	a_item_value = p_value;
 
@@ -140,6 +145,9 @@ bool OpcItem::writeValue(const std::string& p_value) {
 		return false;
 	}
 
+	log_opc->addMessage("SYNC WRITE ITEM [" + a_item_name + "] UPDATE: Valor [" + a_item_value +
+		"], Qualidade: [" + a_item_quality +
+		"] Timestamp: [" + a_item_timestamp + "]");
 	log_buffer->addMessage("Valor \"" + a_item_value + "\" escrito com sucesso no item " + a_item_name);
 	CoTaskMemFree(errors);
 	pIOPCSyncIO->Release();

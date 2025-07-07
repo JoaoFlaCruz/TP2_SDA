@@ -117,19 +117,45 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
 
-   SetWindowPos(hWnd, nullptr, 100, 100, 720, 720, SWP_NOZORDER);
+   // Tamanho da janela
+   SetWindowPos(hWnd, nullptr, 50, 50, 1080, 720, SWP_NOZORDER);
 
-   // Label
-   CreateWindowA("STATIC", "Log de operações:",
+   // Label 1 - TCP
+   CreateWindowA("STATIC", "Mensagens TCP:",
        WS_CHILD | WS_VISIBLE,
-       50, 25, 200, 20,
-       hWnd, (HMENU)1002, hInst, nullptr);
+       50, 25, 300, 20,
+       hWnd, (HMENU)2001, hInst, nullptr);
 
-   // Caixa de texto
+   // Caixa de texto 1
    CreateWindowA("EDIT", "",
        WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL,
-       50, 50, 620, 6200,
-       hWnd, (HMENU)1001, hInst, nullptr);
+       50, 50, 980, 180,
+       hWnd, (HMENU)3001, hInst, nullptr);
+
+   // Label 2 - OPC DA
+   CreateWindowA("STATIC", "Mensagens OPC DA:",
+       WS_CHILD | WS_VISIBLE,
+       50, 240, 300, 20,
+       hWnd, (HMENU)2002, hInst, nullptr);
+
+   // Caixa de texto 2
+   CreateWindowA("EDIT", "",
+       WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL,
+       50, 265, 980, 180,
+       hWnd, (HMENU)3002, hInst, nullptr);
+
+   // Label 3 - Operações
+   CreateWindowA("STATIC", "Log de operações:",
+       WS_CHILD | WS_VISIBLE,
+       50, 455, 300, 20,
+       hWnd, (HMENU)2003, hInst, nullptr);
+
+   // Caixa de texto 3
+   CreateWindowA("EDIT", "",
+       WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL,
+       50, 480, 980, 180,
+       hWnd, (HMENU)3003, hInst, nullptr);
+
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
@@ -232,9 +258,19 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 
 // Updates ativados pelos triggers em Update.h
 void UpdateTextBox(HWND hWnd) {
-    HWND hEdit = GetDlgItem(hWnd, 1001);
+    HWND hEdit = GetDlgItem(hWnd, 3003);
     if (!hEdit) return;
     LogBuffer* log_buffer = LogBuffer::getInstance();
     std::string text = log_buffer->getAllMessages();
+    SetWindowTextA(hEdit, text.c_str());
+    hEdit = GetDlgItem(hWnd, 3001);
+    if (!hEdit) return;
+    LogTcp* log_tcp = LogTcp::getInstance();
+    text = log_tcp->getAllMessages();
+    SetWindowTextA(hEdit, text.c_str());
+    hEdit = GetDlgItem(hWnd, 3002);
+    if (!hEdit) return;
+    LogOpc* log_opc = LogOpc::getInstance();
+    text = log_opc->getAllMessages();
     SetWindowTextA(hEdit, text.c_str());
 }

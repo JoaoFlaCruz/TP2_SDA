@@ -30,6 +30,9 @@
     <Filter Include="src\Opc\SimpleOPCClient_V3">
       <UniqueIdentifier>{f90eec1f-2481-44eb-aa9e-77a58aabb532}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Log">
+      <UniqueIdentifier>{161a000c-ac0a-4dd6-b54b-832f0469860e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -80,9 +83,6 @@
     <ClInclude Include="CentralController.h">
       <Filter>src\SystemSingleton</Filter>
     </ClInclude>
-    <ClInclude Include="LogBuffer.h">
-      <Filter>src\SystemSingleton</Filter>
-    </ClInclude>
     <ClInclude Include="OpcOperator.h">
       <Filter>src\SystemSingleton</Filter>
     </ClInclude>
@@ -128,6 +128,15 @@
     <ClInclude Include="Config.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="LogOpc.h">
+      <Filter>src\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="LogBuffer.h">
+      <Filter>src\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="LogTcp.h">
+      <Filter>src\Log</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SocketServer.cpp">
@@ -164,9 +173,6 @@
       <Filter>src\Socket</Filter>
     </ClCompile>
     <ClCompile Include="CentralController.cpp">
-      <Filter>src\SystemSingleton</Filter>
-    </ClCompile>
-    <ClCompile Include="LogBuffer.cpp">
       <Filter>src\SystemSingleton</Filter>
     </ClCompile>
     <ClCompile Include="OpcOperator.cpp">
@@ -210,6 +216,15 @@
     </ClCompile>
     <ClCompile Include="MessageSocketClient.cpp">
       <Filter>src\Socket</Filter>
+    </ClCompile>
+    <ClCompile Include="LogBuffer.cpp">
+      <Filter>src\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="LogOpc.cpp">
+      <Filter>src\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="LogTcp.cpp">
+      <Filter>src\Log</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

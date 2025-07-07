@@ -13,18 +13,19 @@
 #include "Update.h"
 #include "Config.h"
 
-class LogBuffer {
+class LogOpc
+{
 private:
     std::deque<std::string> a_messages;
-    const size_t a_maxSize = LOG_BUFFER_SIZE;
+    const size_t a_maxSize = OPC_BUFFER_SIZE;
     std::mutex a_mutex;
 
-    LogBuffer() = default;
-    ~LogBuffer() = default;
-
+    LogOpc() = default;
+    ~LogOpc() = default;
 public:
-    static LogBuffer* getInstance();
+    static LogOpc* getInstance();
 
     void addMessage(const std::string& p_msg);
     std::string getAllMessages();
 };
+

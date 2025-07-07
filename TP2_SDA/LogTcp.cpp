@@ -1,11 +1,11 @@
-#include "LogBuffer.h"
+#include "LogTcp.h"
 
-LogBuffer* LogBuffer::getInstance() {
-    static LogBuffer instance;
+LogTcp* LogTcp::getInstance() {
+    static LogTcp instance;
     return &instance;
 }
 
-void LogBuffer::addMessage(const std::string& p_msg) {
+void LogTcp::addMessage(const std::string& p_msg) {
     std::lock_guard<std::mutex> lock(a_mutex);
 
     auto now = std::chrono::system_clock::now();
@@ -25,7 +25,7 @@ void LogBuffer::addMessage(const std::string& p_msg) {
 }
 
 
-std::string LogBuffer::getAllMessages() {
+std::string LogTcp::getAllMessages() {
     std::lock_guard<std::mutex> lock(a_mutex);
     std::string combined;
     for (auto it = a_messages.rbegin(); it != a_messages.rend(); ++it) {

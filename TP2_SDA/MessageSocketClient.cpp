@@ -13,6 +13,7 @@ MessageSocketClient::~MessageSocketClient() {}
 
 void MessageSocketClient::sendMessage(const std::string& p_message) {
     LogBuffer* log_buffer = LogBuffer::getInstance();
+    LogTcp* log_tcp = LogTcp::getInstance();
 
     if (p_message == "end") {
         //log_buffer->addMessage("Mensagem de encerramento recebida. Encerrando servidor...");
@@ -23,6 +24,7 @@ void MessageSocketClient::sendMessage(const std::string& p_message) {
     std::string formatted_msg = formatMessage(p_message); // ajusta para 34 caracteres
 
     log_buffer->addMessage("Enviando mensagem: " + p_message);
+    log_tcp->addMessage(p_message);
 
     if (a_client_socket != INVALID_SOCKET) {
         send(a_client_socket, formatted_msg.c_str(), static_cast<int>(formatted_msg.size()), 0);

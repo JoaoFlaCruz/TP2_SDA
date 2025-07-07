@@ -21,6 +21,7 @@
 
 #include "OpcConstants.h"
 #include "LogBuffer.h"
+#include "LogOpc.h"
 
 #define VT VT_R4
 

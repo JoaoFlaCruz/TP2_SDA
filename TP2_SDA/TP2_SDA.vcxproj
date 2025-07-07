@@ -151,6 +151,8 @@
     <ClInclude Include="EndMessage.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Config.h" />
+    <ClInclude Include="LogOpc.h" />
+    <ClInclude Include="LogTcp.h" />
     <ClInclude Include="MessageSocketClient.h" />
     <ClInclude Include="OpcConstants.h" />
     <ClInclude Include="LogBuffer.h" />
@@ -184,6 +186,8 @@
     <ClCompile Include="EDMessage.cpp" />
     <ClCompile Include="EndMessage.cpp" />
     <ClCompile Include="LogBuffer.cpp" />
+    <ClCompile Include="LogOpc.cpp" />
+    <ClCompile Include="LogTcp.cpp" />
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="MessageSocketClient.cpp" />
     <ClCompile Include="MessageSocketServer.cpp" />

@@ -6,10 +6,12 @@
 #include <iostream>
 #include <process.h>
 #include <mutex>
-#include "LogBuffer.h"
 #include <thread>
 #include <chrono>
 #include "MessageSocketClient.h"
+
+#include "LogBuffer.h"
+#include "LogTcp.h"
 
 #pragma comment(lib, "ws2_32.lib")
 
