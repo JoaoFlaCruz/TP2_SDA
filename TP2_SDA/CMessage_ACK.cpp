@@ -15,5 +15,10 @@ StringMessage* CMessage_ACK::buildSelf(const std::vector<std::string>& values) {
 
     int seq = std::stoi(values[0]);
 
-    return new CMessage_ACK(seq);
+    return (StringMessage*) new CMessage_ACK(seq);
+}
+
+StringMessage* CMessage_ACK::getResponse() {
+    std::vector<std::string> data;
+    return (StringMessage*) EndMessage::buildSelf(data);
 }

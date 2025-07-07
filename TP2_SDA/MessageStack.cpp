@@ -1,12 +1,13 @@
 #include "MessageStack.h"
-#include "MessageSocketServer.h"
+#include "MessageSocketClient.h"
+#include "SocketMessage.h"
 
 MessageStack* MessageStack::getInstance() {
     static MessageStack instance;
     return &instance;
 }
 
-bool MessageStack::insertSocketMessage(std::string p_message, MessageSocketServer* p_socket_server) {
+bool MessageStack::insertSocketMessage(std::string p_message, MessageSocketClient* p_socket_server) {
     std::lock_guard<std::mutex> lock(a_mutex);
 
     if (isFull()) {
@@ -15,21 +16,21 @@ bool MessageStack::insertSocketMessage(std::string p_message, MessageSocketServe
 
     SocketMessage message(p_message, p_socket_server);
 
-    a_queue[a_tail] = std::make_unique<Message>(message);
+    a_queue[a_tail] = std::make_unique<SocketMessage>(message);
     a_tail = (a_tail + 1) % MAX_SIZE;
     ++a_size;
 
     return true;
 }
 
-std::unique_ptr<Message> MessageStack::getNext() {
+std::unique_ptr<SocketMessage> MessageStack::getNext() {
     std::lock_guard<std::mutex> lock(a_mutex);
 
     if (isEmpty()) {
         return nullptr;
     }
 
-    std::unique_ptr<Message> result = std::move(a_queue[a_head]);
+    std::unique_ptr<SocketMessage> result = std::move(a_queue[a_head]);
     a_head = (a_head + 1) % MAX_SIZE;
     --a_size;
 

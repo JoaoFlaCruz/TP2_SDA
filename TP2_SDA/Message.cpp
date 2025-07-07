@@ -23,3 +23,7 @@ bool Message::send() {
 std::string Message::toString() {
     return a_string_message->getMessage();
 }
+
+StringMessage* Message::getStringMessage() {
+    return (StringMessage*)a_string_message;
+}

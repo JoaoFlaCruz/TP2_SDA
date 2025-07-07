@@ -1,11 +1,11 @@
-#include "LogBuffer.h"
+#include "LogOpc.h"
 
-LogBuffer* LogBuffer::getInstance() {
-    static LogBuffer instance;
+LogOpc* LogOpc::getInstance() {
+    static LogOpc instance;
     return &instance;
 }
 
-void LogBuffer::addMessage(const std::string& p_msg) {
+void LogOpc::addMessage(const std::string& p_msg) {
     std::lock_guard<std::mutex> lock(a_mutex);
 
     auto now = std::chrono::system_clock::now();
@@ -25,7 +25,7 @@ void LogBuffer::addMessage(const std::string& p_msg) {
 }
 
 
-std::string LogBuffer::getAllMessages() {
+std::string LogOpc::getAllMessages() {
     std::lock_guard<std::mutex> lock(a_mutex);
     std::string combined;
     for (auto it = a_messages.rbegin(); it != a_messages.rend(); ++it) {

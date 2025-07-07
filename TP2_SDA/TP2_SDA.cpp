@@ -1,16 +1,21 @@
 // TP2_SDA.cpp : Defines the entry point for the application.
 //
-
+#pragma once
+#define WIN32_LEAN_AND_MEAN
 #include "framework.h"
 #include "TP2_SDA.h"
 
 #include "CentralController.h"
 #include "SocketServer.h"
 #include "LogBuffer.h"
+#include "OpcOperator.h"
+
+#include "Config.h"
 
 #pragma comment(lib, "user32.lib")
 
 #define MAX_LOADSTRING 100
+#define WM_UPDATE_TRIGGER_MAIN_WINDOW (WM_APP + 1)
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
@@ -112,39 +117,68 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
       return FALSE;
    }
 
-   SetWindowPos(hWnd, nullptr, 100, 100, 720, 720, SWP_NOZORDER);
+   // Tamanho da janela
+   SetWindowPos(hWnd, nullptr, 50, 50, 1080, 720, SWP_NOZORDER);
 
-   // Label
-   CreateWindowA("STATIC", "Log de operações:",
+   // Label 1 - TCP
+   CreateWindowA("STATIC", "Mensagens TCP:",
        WS_CHILD | WS_VISIBLE,
-       50, 25, 200, 20,
-       hWnd, (HMENU)1002, hInst, nullptr);
+       50, 25, 300, 20,
+       hWnd, (HMENU)2001, hInst, nullptr);
 
-   // Caixa de texto
+   // Caixa de texto 1
    CreateWindowA("EDIT", "",
        WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL,
-       50, 50, 620, 6200,
-       hWnd, (HMENU)1001, hInst, nullptr);
+       50, 50, 980, 180,
+       hWnd, (HMENU)3001, hInst, nullptr);
+
+   // Label 2 - OPC DA
+   CreateWindowA("STATIC", "Mensagens OPC DA:",
+       WS_CHILD | WS_VISIBLE,
+       50, 240, 300, 20,
+       hWnd, (HMENU)2002, hInst, nullptr);
+
+   // Caixa de texto 2
+   CreateWindowA("EDIT", "",
+       WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL,
+       50, 265, 980, 180,
+       hWnd, (HMENU)3002, hInst, nullptr);
+
+   // Label 3 - Operações
+   CreateWindowA("STATIC", "Log de operações:",
+       WS_CHILD | WS_VISIBLE,
+       50, 455, 300, 20,
+       hWnd, (HMENU)2003, hInst, nullptr);
+
+   // Caixa de texto 3
+   CreateWindowA("EDIT", "",
+       WS_CHILD | WS_VISIBLE | ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL,
+       50, 480, 980, 180,
+       hWnd, (HMENU)3003, hInst, nullptr);
+
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
+   Update* update = Update::getInstance();
+   update->setMainWindow(hWnd);
    
    std::thread([]() {
        SocketServer socket = SocketServer();
        socket.initializeSocket();
-       socket.bindSocket(4885);
+       int tcp_port = TCP_PORT;
+       socket.bindSocket(tcp_port);
        socket.listenSocket();
        }).detach();
-
-   CentralController* controller = CentralController::getInstance();
 
    std::thread([]() {
        CentralController* controller = CentralController::getInstance();
        controller->consumeMessages();
        }).detach();
 
-   SetTimer(hWnd, 1, 100, NULL);
+   std::thread([]() {
+       OpcOperator* opc_operator = OpcOperator::getInstance();
+       }).detach(); 
 
    return TRUE;
 }
@@ -191,11 +225,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
-    case WM_TIMER:
-        if (wParam == 1) {
-            // Aqui você faz o update que quiser, por exemplo:
-            UpdateTextBox(hWnd);
-        }
+    case WM_UPDATE_TRIGGER_MAIN_WINDOW:
+        // Chamadas de função ativadas pelo Trigger de Update para Main Screen
+        UpdateTextBox(hWnd);
         break;
 
     default:
@@ -224,10 +256,21 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     return (INT_PTR)FALSE;
 }
 
+// Updates ativados pelos triggers em Update.h
 void UpdateTextBox(HWND hWnd) {
-    HWND hEdit = GetDlgItem(hWnd, 1001);
+    HWND hEdit = GetDlgItem(hWnd, 3003);
     if (!hEdit) return;
     LogBuffer* log_buffer = LogBuffer::getInstance();
     std::string text = log_buffer->getAllMessages();
+    SetWindowTextA(hEdit, text.c_str());
+    hEdit = GetDlgItem(hWnd, 3001);
+    if (!hEdit) return;
+    LogTcp* log_tcp = LogTcp::getInstance();
+    text = log_tcp->getAllMessages();
+    SetWindowTextA(hEdit, text.c_str());
+    hEdit = GetDlgItem(hWnd, 3002);
+    if (!hEdit) return;
+    LogOpc* log_opc = LogOpc::getInstance();
+    text = log_opc->getAllMessages();
     SetWindowTextA(hEdit, text.c_str());
 }

@@ -1,5 +1,9 @@
 #pragma once
+#define WIN32_LEAN_AND_MEAN
 #include "StringMessage.h"
+#include "OpcOperator.h"
+#include "CMessage_ACK.h"
+
 class EDMessage :
     public StringMessage
 {
@@ -18,5 +22,6 @@ public:
     static StringMessage* buildSelf(const std::vector<std::string>& values);
 
     std::string getMessage() override;
+    StringMessage* getResponse() override;
 };
 

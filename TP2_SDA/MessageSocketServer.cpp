@@ -28,16 +28,24 @@ void MessageSocketServer::closeSocket() {
 
 void MessageSocketServer::acceptMessages() {
     LogBuffer* log_buffer = LogBuffer::getInstance();
+    LogTcp* log_tcp = LogTcp::getInstance();
     log_buffer->addMessage(std::string("Aguardando mensagens do cliente..."));
 
     while (true) {
+        int bytesReceived = 0;
         char buffer[1024] = { 0 };
-        int bytesReceived = recv(a_client_socket, buffer, sizeof(buffer) - 1, 0);
+        {
+            std::lock_guard<std::mutex> lock(a_mutex);
+            bytesReceived = recv(a_client_socket, buffer, sizeof(buffer) - 1, 0);
+        }
         if (bytesReceived > 0) {
             buffer[bytesReceived] = '\0';
             std::string msg(buffer);
 
-            a_message_stack->insertSocketMessage(msg, this);
+            MessageSocketClient* new_socket = new MessageSocketClient(a_client_socket);
+
+            log_tcp->addMessage(msg);
+            a_message_stack->insertSocketMessage(msg, new_socket);
         }
     }
 }

@@ -28,5 +28,9 @@ StringMessage* DPMessage::buildSelf(const std::vector<std::string>& values) {
     float prod_rhythm = std::stof(values[3]);
     float oee = std::stof(values[4]);
 
-    return new DPMessage(seq, prod_cell, pieces_number, prod_rhythm, oee);
+    return (StringMessage*) new DPMessage(seq, prod_cell, pieces_number, prod_rhythm, oee);
+}
+
+StringMessage* DPMessage::getResponse() {
+    return nullptr;
 }

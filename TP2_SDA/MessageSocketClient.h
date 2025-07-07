@@ -8,7 +8,6 @@
 #include <mutex>
 #include <thread>
 #include <chrono>
-#include "MessageSocketClient.h"
 
 #include "LogBuffer.h"
 #include "LogTcp.h"
@@ -18,19 +17,14 @@
 typedef unsigned (WINAPI* CAST_FUNCTION)(LPVOID);
 typedef unsigned* CAST_LPDWORD;
 
-class MessageStack;
-
-class MessageSocketServer
+class MessageSocketClient
 {
 protected:
     SOCKET a_client_socket;
-    MessageStack* a_message_stack;
-    std::mutex a_mutex;
 public:
-    MessageSocketServer(SOCKET p_client_socket = INVALID_SOCKET);
-    ~MessageSocketServer();
+    MessageSocketClient(SOCKET p_client_socket = INVALID_SOCKET);
+    ~MessageSocketClient();
 
-    void acceptMessages();
-    void closeSocket();
+    void sendMessage(const std::string& p_message);
+    std::string formatMessage(const std::string& raw);
 };
-

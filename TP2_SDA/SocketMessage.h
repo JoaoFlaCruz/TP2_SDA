@@ -1,17 +1,19 @@
 #pragma once
 #include "Message.h"
-#include "MessageSocketServer.h"
-#include "LogBuffer.h";
+#include "MessageSocketClient.h"
+#include "MessageStack.h"
+#include "LogBuffer.h"
+
+class MessageStack;
 
 class SocketMessage :
     public Message
 {
 protected:
-	MessageSocketServer* a_socket_server;
+	MessageSocketClient* a_socket_server;
 
 public:
-	SocketMessage(std::string p_message, MessageSocketServer* p_socket_server);
+	SocketMessage(std::string p_message, MessageSocketClient* p_socket_server);
 	~SocketMessage();
-
 	bool send();
 };

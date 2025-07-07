@@ -1,8 +1,13 @@
 #pragma once
-
+#define WIN32_LEAN_AND_MEAN
 #include "MessageStack.h"
-#include "LogBuffer.h";
+#include "LogBuffer.h"
 #include <mutex>
+#include <chrono>
+#include <thread>
+#include "SocketMessage.h"
+
+#include "OpcOperator.h"
 
 class CentralController
 {
@@ -11,11 +16,12 @@ protected:
 	static CentralController* instance;
 	std::mutex a_mutex;
 
-	CentralController() = default;
+	CentralController();
 	~CentralController() = default;
 
 public:
 	static CentralController* getInstance();
 	void consumeMessages();
+	void handleMessage(std::unique_ptr<SocketMessage> p_message);
 };
 

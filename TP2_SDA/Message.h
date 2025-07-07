@@ -22,5 +22,7 @@ public:
 
 	bool send();
 	std::string toString();
+	StringMessage* getStringMessage();
+	std::vector<std::string> getData();
 };
 
